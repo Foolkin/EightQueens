@@ -1,83 +1,81 @@
 /**
- * Created by admin on 4/15/14.
+ *
+ * @author
  */
 public class Queens {
-    public static final int SIZE = 8;
 
-    int[] rowState = new int[SIZE];
+    private int[] queenPos = new int[Constants.SIZE];
 
-    int combinations;
+    private int combinations;
 
-    public static void main(String[] args){
-        Queens queen = new Queens();
-        while (queen.next()){
-            if(queen.checkPosition()){
-                queen.drawBoard();
-
-                queen.combinations++;
-                System.out.println("========================");
-            }
-        }
-        System.out.println("Total: " + queen.combinations);
-
-    }
-
-    /*
-    Check, is queens attack each other by vertical and diagonal
+    /**
+     * Checks, is queens attack each other by vertical and diagonal.
+     * @return true if queens attack each other by vertical and diagonal.
      */
     public boolean checkPosition(){
-        for(int i = 0; i < SIZE; i++)
-            for(int j = i + 1; j < SIZE; j++) {
-                if (rowState[i] == rowState[j] ||
-                        (Math.abs(i - j) == (Math.abs(rowState[i] - rowState[j])))) {
+        for(int i = 0; i < Constants.SIZE; i++)
+            for(int j = i + 1; j < Constants.SIZE; j++) {
+                if (queenPos[i] == queenPos[j] ||
+                        (Math.abs(i - j) == (Math.abs(queenPos[i] - queenPos[j])))) {
                     return false;
                 }
             }
-        System.out.println("true");
         return true;
     }
 
-    /*
-    Move queen one position to the right and return true
-    If queen in a end position< the queen is set to a first position
-    and moves the queen located above and so on
-     If the lines remains retruns false
+    /**
+     * Move queen one position to the right and return true
+     * If queen in a end position, the queen is set to a first position
+     * and moves the queen located above and so on
+     * If the lines remains returns false
+     * @param row row number.
+     * @return false if queen in a end position.
      */
     public boolean move(int row){
-//        System.out.println("move starts");
-        if(rowState[row] < SIZE -1) {
-            rowState[row]++;
+        if(queenPos[row] < Constants.SIZE -1) {
+            queenPos[row]++;
             return true;
         }
 
-        rowState[row] = 0;
-        if(row == 0) {
-            return false;
-        }
-        else {
-            return move(row - 1);
-        }
+        queenPos[row] = 0;
+
+        return row != 0 && move(row - 1);
     }
 
-    /*
-    generate new combination of queens on board
+    /**
+     * generate new combination of queens on board
+     * @return true if queens has moves
      */
     public boolean next(){
-        return move(SIZE - 1);
+        return move(Constants.SIZE - 1);
     }
 
-    /*
-    output on console board with queens
-     */
-    public void drawBoard(){
-        for(int i = 0; i < SIZE; i++){
-            int position = rowState[i];
-            for(int j = 0; j < SIZE; j ++){
-
-                System.out.print(j == position ? "|Q|" : "|_|");
+    public void findAllSolutions(){
+        while (next()){
+            if(checkPosition()){
+                Output.drawBoard(this);
+                combinations++;
             }
-            System.out.println();
         }
-
+        System.out.println("Total: " + combinations);
     }
+
+    /**
+     * queenPos getter.
+     * @return queenPos
+     */
+    public int[] getQueenPos(){
+        return queenPos;
+    }
+
+    /**
+     *  Starts look all solutions by alignment queens
+     * @param args
+     */
+    public static void main(String[] args){
+        Queens queen = new Queens();
+
+        queen.findAllSolutions();
+    }
+
 }

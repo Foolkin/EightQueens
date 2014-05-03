@@ -6,5 +6,5 @@ public final class Constants {
     /**
      * Desk size.
      */
-    public static final int SIZE = 8;
+    public static final int DESK_SIZE = 8;
 }

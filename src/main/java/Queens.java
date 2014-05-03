@@ -4,7 +4,10 @@
  */
 public class Queens {
 
-    private int[] queenPos = new int[Constants.SIZE];
+    /**
+     * Queen position on each line. For example: queenPos[3] = 5, is queen on row 3 column 5
+     */
+    private int[] queenPos = new int[Constants.DESK_SIZE];
 
     private int combinations;
 
@@ -13,8 +16,8 @@ public class Queens {
      * @return true if queens attack each other by vertical and diagonal.
      */
     public boolean checkPosition(){
-        for(int i = 0; i < Constants.SIZE; i++)
-            for(int j = i + 1; j < Constants.SIZE; j++) {
+        for(int i = 0; i < Constants.DESK_SIZE; i++)
+            for(int j = i + 1; j < Constants.DESK_SIZE; j++) {
                 if (queenPos[i] == queenPos[j] ||
                         (Math.abs(i - j) == (Math.abs(queenPos[i] - queenPos[j])))) {
                     return false;
@@ -32,7 +35,7 @@ public class Queens {
      * @return false if queen in a end position.
      */
     public boolean move(int row){
-        if(queenPos[row] < Constants.SIZE -1) {
+        if(queenPos[row] < Constants.DESK_SIZE -1) {
             queenPos[row]++;
             return true;
         }
@@ -47,7 +50,7 @@ public class Queens {
      * @return true if queens has moves
      */
     public boolean next(){
-        return move(Constants.SIZE - 1);
+        return move(Constants.DESK_SIZE - 1);
     }
 
     public void findAllSolutions(){

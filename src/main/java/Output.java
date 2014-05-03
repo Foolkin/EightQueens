@@ -16,9 +16,9 @@ public class Output {
      * Output board and queens alignment
      */
     public static void drawBoard(Queens queens){
-        for(int i = 0; i < Constants.SIZE; i++){
+        for(int i = 0; i < Constants.DESK_SIZE; i++){
             int position = queens.getQueenPos()[i];
-            for(int j = 0; j < Constants.SIZE; j ++){
+            for(int j = 0; j < Constants.DESK_SIZE; j ++){
 
                 System.out.print(j == position ? "|Q|" : "|_|");
             }

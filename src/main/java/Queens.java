@@ -70,15 +70,4 @@ public class Queens {
     public int[] getQueenPos(){
         return queenPos;
     }
-
-    /**
-     *  Starts look all solutions by alignment queens
-     * @param args
-     */
-    public static void main(String[] args){
-        Queens queen = new Queens();
-
-        queen.findAllSolutions();
-    }
-
 }
